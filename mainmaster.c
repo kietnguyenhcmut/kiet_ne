@@ -7,10 +7,10 @@
 #pragma config BOREN = OFF      // BOR disabled
 #pragma config WRT = OFF        // Write protection off
 
-#include <xc.h>
+#include <xc.h>/cc
 #define _XTAL_FREQ 8000000
 
-// ??a ch? 8-bit trên bus (7-bit<<1 | R/W)
+// ??a ch? 8-bit trÃªn bus (7-bit<<1 | R/W)
 #define SLA2_W 0x10     // Slave U2 write  (0x08<<1)
 #define SLA2_R 0x11     // Slave U2 read   (0x08<<1 | 1)
 #define SLA3_W 0x12     // Slave U3 write  (0x09<<1)
@@ -54,7 +54,7 @@ unsigned short I2C_Master_Read(unsigned short ack) {
     ACKEN = 1;
     return val;
 }
-// S? d?ng chung hàm ghi, truy?n address ??ng
+// S? d?ng chung hÃ m ghi, truy?n address ??ng
 void I2C_Write(int address, int data) {
     I2C_Master_Start();
     I2C_Master_Write(address);
@@ -72,7 +72,7 @@ void main() {
     TRISB1 = 1;  // RB1 input
 
     while(1) {
-        // Nút RB0: g?i "12.56 " và "3.78 " ??n Slave U2
+        // NÃºt RB0: g?i "12.56 " vÃ  "3.78 " ??n Slave U2
         if (!PORTBbits.RB0) {
             while (!PORTBbits.RB0);
             // "12.56 "
@@ -90,7 +90,7 @@ void main() {
             I2C_Write(SLA2_W, ' ');
         }
 
-        // Nút RB1: ??c 10 ký t? t? Slave U3, hi?n th? lên terminal Master
+        // NÃºt RB1: ??c 10 kÃ½ t? t? Slave U3, hi?n th? lÃªn terminal Master
         if (!PORTBbits.RB1) {
             while (!PORTBbits.RB1);
             for (int j = 0; j < 10; j++) {
